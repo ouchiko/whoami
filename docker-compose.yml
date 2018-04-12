@@ -1,0 +1,62 @@
+version: '2'
+
+services:
+    # web-front-end
+    # web-nginx:
+    #     container_name: web
+    #     build:
+    #         context: .
+    #         dockerfile: ./nginx/web/Dockerfile
+    #     depends_on:
+    #         - web-php
+    # web-php:
+    #     container_name: web-bridge
+    #     build:
+    #         context: .
+    #         dockerfile: ./php/web/Dockerfile
+
+    # api-service-end
+    api-nginx:
+        container_name: api-nginx
+        build:
+            context: .
+            dockerfile: ./nginx/api/Dockerfile
+        depends_on:
+            - api-bridge
+
+    api-bridge:
+        container_name: api-bridge
+        build:
+            context: .
+            dockerfile: ./nginx/api/php/Dockerfile
+
+    api-composer:
+        restart: 'no'
+        image: composer/composer:php7
+        command: install update
+        volumes:
+            - ./nginx/api/src:/app
+
+    # mysql
+    whoami-mysql:
+        image: mysql:5.7
+        restart: unless-stopped
+        container_name: whoami-mysql
+        env_file:
+            - ./store/mysql/conf/.env
+        volumes:
+            - ./store/mysql/data:/var/lib/mysql
+            - ./store/mysql/conf:/etc/mysql/conf.d
+            - ./store/mysql/logs:/var/log/mysql
+        ports:
+            - 3306:3306
+
+    # redis-service
+    whoami-redis:
+        container_name: whoami-redis
+        image: redis
+        restart: unless-stopped
+        env_file:
+              - ./store/redis/config/redis.env
+        volumes:
+            - ./store/redis/data:/data
