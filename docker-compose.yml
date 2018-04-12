@@ -2,18 +2,28 @@ version: '2'
 
 services:
     # web-front-end
-    # web-nginx:
-    #     container_name: web
-    #     build:
-    #         context: .
-    #         dockerfile: ./nginx/web/Dockerfile
-    #     depends_on:
-    #         - web-php
-    # web-php:
-    #     container_name: web-bridge
-    #     build:
-    #         context: .
-    #         dockerfile: ./php/web/Dockerfile
+    web-nginx:
+        container_name: web-nginx
+        build:
+            context: .
+            dockerfile: ./nginx/web/Dockerfile
+        depends_on:
+            - web-bridge
+
+    web-bridge:
+        container_name: web-bridge
+        build:
+            context: .
+            dockerfile: ./nginx/web/php/Dockerfile
+
+    web-composer:
+        restart: 'no'
+        image: composer/composer:php7
+        command: update
+        volumes:
+            - ./nginx/web/src:/app
+
+
 
     # api-service-end
     api-nginx:
@@ -33,7 +43,7 @@ services:
     api-composer:
         restart: 'no'
         image: composer/composer:php7
-        command: install update
+        command: update
         volumes:
             - ./nginx/api/src:/app
 

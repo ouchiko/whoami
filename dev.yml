@@ -1,18 +1,18 @@
 version: '2'
 services:
-    # web-nginx:
-    #     volumes:
-    #         - ./nginx/web/src/public:/var/www/html/public
-    #     env_file:
-    #         - ./dev.env
-    #     ports:
-    #         - 80:80
-    #
-    # web-php:
-    #     volumes:
-    #         - ./nginx/web/src:/var/www/html
-    #     env_file:
-    #         - ./dev.env
+    web-nginx:
+        volumes:
+            - ./nginx/web/src/public:/var/www/html/public
+        env_file:
+            - ./dev.env
+        ports:
+            - 80:80
+
+    web-bridge:
+        volumes:
+            - ./nginx/web/src:/var/www/html
+        env_file:
+            - ./dev.env
 
     api-nginx:
         volumes:

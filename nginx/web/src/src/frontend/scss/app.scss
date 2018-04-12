@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+
+$fontFace: "Lato";
+$baseColor: #CCCCCC;
+
+h1 {
+    display: none;
+}
+
+.appintro {
+    font-family: $fontFace;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.container {
+    .upper {
+        padding: 10px;
+        .logo {
+            font-family: $fontFace;
+            font-size: 40px;
+            font-weight: 300;
+            color: $baseColor;
+        }
+    }
+
+}

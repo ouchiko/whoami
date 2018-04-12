@@ -8,5 +8,11 @@ dev-debug: ## Creates and starts the docker containers with development settings
 
 down:
 	docker-compose down
+
 build:
 	docker-compose build
+
+composer-api:
+	docker-compose up api-composer
+composer-web:
+	docker-compose up web-composer
