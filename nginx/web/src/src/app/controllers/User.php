@@ -12,18 +12,18 @@ class User
         $this->container = $container;
     }
 
+    public function home(Request $request, Response $response, $args)
+    {
+        return $this->container->view->render($response, 'profile.html', [
+            'dataset' => $dataset
+        ]);
+    }
+
     public function getUserInformation(Request $request, Response $response, $args)
     {
         $dataset = json_decode(
             file_get_contents("http://api-nginx/v1/users/information/8.8.8.8")
         );
-
-        print "<XMP>";
-        print_r($dataset);
-        print "</XMP>";
-
-        return $this->container->view->render($response, 'profile.html', [
-            'dataset' => $dataset
-        ]);
+        return $response->withJson($dataset);
     }
 }

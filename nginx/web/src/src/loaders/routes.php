@@ -10,7 +10,8 @@ $container['User'] = function($c) {
 };
 
 // Routes
-$app->get("/hello", \app\controllers\User::class. ':getUserInformation');
+$app->get("/hello", \app\controllers\User::class. ':home');
+$app->post("/hello/investigate", \app\controllers\User::class. ':getUserInformation');
 
 // $app->get('/[{name}]', function (Request $request, Response $response, array $args) {
 //     // Sample log message

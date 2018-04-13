@@ -7,6 +7,18 @@ h1 {
     display: none;
 }
 
+.loading {
+    color: $baseColor;
+    position: fixed;
+    left: 50%;
+    margin-left: -35px;
+    top:50%;
+    margin-bottom: -30px;
+    .spinner {
+        font-size: 70px;
+    }
+}
+
 .appintro {
     font-family: $fontFace;
     font-size: 40px;
@@ -14,6 +26,7 @@ h1 {
 }
 
 .container {
+    display: none;
     .upper {
         padding: 10px;
         .logo {
